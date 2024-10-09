@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 
 function Main() {
   useEffect(() => {
@@ -9,7 +10,7 @@ function Main() {
   });
   return (
     <div>
-      <p>메인입니다.</p>
+      <h1>메인입니다.</h1>
     </div>
   );
 }
