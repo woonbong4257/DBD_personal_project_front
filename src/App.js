@@ -7,6 +7,8 @@ import Book from "./Book/Book";
 import BookDetail from "./Book/BookDetail";
 import Cart from "./Cart/Cart";
 import MyPage from "./MyPage/MyPage";
+import Order from "./Order/Order";
+import OrderList from "./Order/OrderList";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           <Route path="/book/:bookid" element={<BookDetail/>}/>
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/mypage" element={<MyPage/>}/>
+          <Route path="/order" element={<Order/>}/>
+          <Route path="/orderlist" element={<OrderList/>}/>
         </Routes>
       </BrowserRouter>
     </div>
