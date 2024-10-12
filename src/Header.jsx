@@ -39,7 +39,12 @@ function Header() {
   }
 
   function onClickCart() {
-    nav("/cart");
+    if (isLogIn) {
+      nav("/cart");
+    } else {
+      alert("로그인 해야합니다");
+      nav("/login");
+    }
   }
 
   function onClickMyPage() {

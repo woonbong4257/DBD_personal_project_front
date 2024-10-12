@@ -6,32 +6,41 @@ axios.defaults.withCredentials = true;
 function BookDetail() {
   const loc = useLocation();
   const nav = useNavigate();
+
+  const [quantity, setQuantity] = useState(1);
+  const [total, setTotal] = useState(loc.state?.price);
   const [bookInfo, setBookInfo] = useState({
     id: loc.state?.id,
     name: loc.state?.name,
     inven: loc.state?.inven,
     price: loc.state?.price,
   });
-
-  const [quantity, setQuantity] = useState(1);
-  const [total, setTotal] = useState(loc.state?.price);
-
   function onClickBookToCart() {
-    axios.post("http://localhost:4000/cart", { book: bookInfo }).then((res) => {
-      console.log(res.data);
-    });
+    axios
+      .post("http://localhost:4000/cart", {
+        book: bookInfo,
+        quantity: quantity,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
   }
   function onClickDirect() {
-    nav("/order", { state: { bookInfo, type: "direct" } });
+    nav("/order", {
+      state: { list: bookInfo, type: "direct", quantity, total },
+    });
   }
 
   function onClickPlus() {
-    setQuantity(quantity + 1);
-    // setTotal(bookInfo.price * quantity);
+    if (bookInfo.inven <= quantity) {
+      alert("재고량을 초과 하였습니다.");
+    } else {
+      console.log(bookInfo.inven);
+      setQuantity(quantity + 1);
+    }
   }
   function onClickminus() {
     setQuantity(quantity - 1);
-    // setTotal(bookInfo.price * quantity);
   }
 
   useEffect(() => {

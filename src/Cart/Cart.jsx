@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 function Cart() {
   const [list, setList] = useState([]);
   const [total, setTotal] = useState(0);
-  const [quan, setQuan] = useState(0);
+  const [quantity, setQuantity] = useState(0);
   const nav = useNavigate();
 
   useEffect(() => {
@@ -19,12 +19,12 @@ function Cart() {
       setTotal(sumPrice);
 
       const sumQuan = res.data.reduce((acc, item) => acc + item.quantity, 0);
-      setQuan(sumQuan);
+      setQuantity(sumQuan);
     });
   }, []);
 
   console.log("cart: ", list);
-  console.log("총 금액: ", total, "총 수량: ", quan);
+  console.log("총 금액: ", total, "총 수량: ", quantity);
 
   function onClickMinus(cart) {
     axios.post("http://localhost:4000/quan", {
@@ -38,12 +38,13 @@ function Cart() {
     axios.post("http://localhost:4000/quan", {
       state: "plus",
       book: cart.book_id,
+      inven: cart.inventory,
     });
     window.location.reload();
   }
 
   function onClickBuy() {
-    nav("/order", { state: { list, total, quan, type: "cart" } });
+    nav("/order", { state: { list, total, quantity, type: "cart" } });
   }
 
   return (
@@ -60,7 +61,7 @@ function Cart() {
           </li>
         ))}
       </ul>
-      <div>총 수량: {quan}</div>
+      <div>총 수량: {quantity}</div>
       <div>총액: {total}</div>
       <button onClick={onClickBuy}>구매하기</button>
     </div>

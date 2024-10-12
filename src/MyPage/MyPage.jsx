@@ -18,23 +18,29 @@ function MyPage() {
 
   useEffect(() => {
     axios.get("http://localhost:4000/mypage").then((res) => {
-      setUserName(res.data[0]);
-      if (typeof res.data[1] === "string") {
-        setCardInfo(res.data[1]);
-        setAddrInfo(res.data[1]);
+      if (res.data.message) {
+        setUserName(res.data.name);
+        alert(res.data.message);
       } else {
-        const cardData = res.data[1].map((card) => ({
-          cardId: card.card_id,
-          period: card.period,
-          company: card.company,
-        }));
-        setCardInfo(cardData);
-        const addrData = res.data[2].map((addr) => ({
-          zipCode: addr.zip_code,
-          basic: addr.basic,
-          detail: addr.detail,
-        }));
-        setAddrInfo(addrData);
+        setUserName(res.data.name);
+
+        if (res.data.card) {
+          const cardData = res.data.card.map((card) => ({
+            cardId: card.card_id,
+            period: card.period,
+            company: card.company,
+          }));
+          setCardInfo(cardData);
+        }
+
+        if (res.data.addr) {
+          const addrData = res.data.addr.map((addr) => ({
+            zipCode: addr.zip_code,
+            basic: addr.basic,
+            detail: addr.detail,
+          }));
+          setAddrInfo(addrData);
+        }
       }
     });
   }, []);
