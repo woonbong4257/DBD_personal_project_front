@@ -41,6 +41,7 @@ function MyPage() {
           }));
           setAddrInfo(addrData);
         }
+        setPay(res.data.pay[0].creadit);
       }
     });
   }, []);
@@ -58,15 +59,19 @@ function MyPage() {
   function onClickCard() {
     axios.post("http://localhost:4000/card", { card: userCard });
     console.log(userCard);
+    window.location.reload();
   }
 
   function onClickAddr() {
     axios.post("http://localhost:4000/addr", { addr: userAddr });
+    window.location.reload();
   }
 
   return (
     <div>
       <h1>{userName}님의 페이지</h1>
+      <div>동서페이 잔액: {pay}원</div>
+
       <div>카드 정보</div>
       <ul>
         {cardInfo.map((card, idx) => (

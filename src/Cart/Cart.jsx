@@ -62,7 +62,7 @@ function Cart() {
         ))}
       </ul>
       <div>총 수량: {quantity}</div>
-      <div>총액: {total}</div>
+      <div>총액: {total.toLocaleString()}</div>
       <button onClick={onClickBuy}>구매하기</button>
     </div>
   );

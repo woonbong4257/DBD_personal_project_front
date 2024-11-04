@@ -24,6 +24,7 @@ function BookDetail() {
       .then((res) => {
         console.log(res.data);
       });
+    alert("장바구니 담기 완료");
   }
   function onClickDirect() {
     nav("/order", {

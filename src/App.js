@@ -9,6 +9,7 @@ import Cart from "./Cart/Cart";
 import MyPage from "./MyPage/MyPage";
 import Order from "./Order/Order";
 import OrderList from "./Order/OrderList";
+import Test1 from "./Test/Test1";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/mypage" element={<MyPage/>}/>
           <Route path="/order" element={<Order/>}/>
           <Route path="/orderlist" element={<OrderList/>}/>
+          <Route path="/test1" element={<Test1/>}/>
         </Routes>
       </BrowserRouter>
     </div>
